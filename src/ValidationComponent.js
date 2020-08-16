@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 class ValidationComponent extends Component {
     render(){
@@ -11,7 +11,11 @@ class ValidationComponent extends Component {
         } else {
             message = null;
         }
-        return message
+        return (
+            <div>
+                {message}
+            </div>
+        )
     }
 }
 

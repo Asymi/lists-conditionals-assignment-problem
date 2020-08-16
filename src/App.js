@@ -13,6 +13,13 @@ class App extends Component {
     this.setState({characters : event.target.value})
   }
 
+  deleteCharHandler = (index) => {
+    const charArr = this.state.characters.split("");
+    charArr.splice(index, 1);
+    const newCharStr = charArr.join("");
+    this.setState({ characters : newCharStr })
+  }
+
   render() {
     const charArr = this.state.characters.split("");
     const charArrObj = charArr.map((char, index) => {
@@ -20,7 +27,9 @@ class App extends Component {
     })
 
     const mapCharArr = charArrObj.map( obj => {
-      return <CharComponent key={obj.id} character={`${obj.character}`}/> 
+      // You can't use onClick etc with class component we define
+      // return <CharComponent onClick={this.deleteCharHandler.bind(this, (obj.id))} key={obj.id} character={`${obj.character}`}/> 
+      return <CharComponent clicked={() => this.deleteCharHandler(obj.id)} key={obj.id} character={`${obj.character}`}/> 
     })
 
     return (
@@ -34,7 +43,8 @@ class App extends Component {
           <li>When you click a CharComponent, it should be removed from the entered text.</li>
         </ol>
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
-        <input onChange={this.countCharacterHandler}/>
+        <input onChange={this.countCharacterHandler} value={this.state.characters}/>
+        <p>{this.state.characters}</p>
         <ValidationComponent textLength={this.state.numOfChars}/>
         {mapCharArr}
       </div>

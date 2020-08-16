@@ -11,7 +11,7 @@ class CharComponent extends Component {
         }
 
         return(
-            <div style={style}>
+            <div style={style} onClick={this.props.clicked}>
                 {this.props.character}
             </div>
         )
